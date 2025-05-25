@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  template:
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.21.6-alpine
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "200m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+        env:
+        - name: ENVIRONMENT
+          value: "production"
+        - name: ENABLE_METRICS
+          value: "true"

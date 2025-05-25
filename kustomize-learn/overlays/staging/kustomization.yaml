@@ -1,0 +1,26 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ../../base
+  - configmap.yaml
+  - metrics-service.yaml
+
+namespace: nginx-staging
+
+namePrefix: staging-
+
+commonLabels:
+  environment: staging
+  variant: testing
+
+commonAnnotations:
+  environment: "staging"
+  note: "This is the staging environment configuration"
+
+patches:
+  - path: deployment.yaml
+
+replicas:
+  - name: nginx-deployment
+    count: 2

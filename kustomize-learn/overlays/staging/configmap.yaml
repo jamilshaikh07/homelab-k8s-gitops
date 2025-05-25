@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-staging-config
+data:
+  nginx.conf: |
+    server {
+      listen 80;
+      server_name staging.example.com;
+      
+      location / {
+        root /usr/share/nginx/html;
+        index index.html;
+      }
+      
+      # Staging-specific configuration
+      location /status {
+        stub_status on;
+        access_log off;
+        allow 10.0.0.0/8;
+        deny all;
+      }
+    }
+  app-config.json: |
+    {
+      "environment": "staging",
+      "logLevel": "debug",
+      "featureFlags": {
+        "newFeature": true,
+        "betaFeature": true
+      }
+    }

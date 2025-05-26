@@ -2,16 +2,9 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-namespace: webserver
+namespace: flux-demo
 
 resources:
   - namespace.yaml
-
-# Renders the Bitnami NGINX Helm chart into plain YAML ⤵︎
-helmCharts:
-  - name: nginx
-    repo: https://charts.bitnami.com/bitnami
-    version: 13.2.24  # Using a specific version known to work
-    releaseName: nginx
-    namespace: webserver
-    valuesFile: values.yaml
+  - deployment.yaml
+  - service.yaml

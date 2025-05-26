@@ -17,7 +17,7 @@ metadata:
   name: nginx
   namespace: flux-system
 spec:
-  targetNamespace: webserver
+  targetNamespace: flux-demo
   interval: 1m
   path: ./flux/apps/nginx
   prune: true
